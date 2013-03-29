@@ -4,7 +4,10 @@
 define(function (require) {
     'use strict';
 
-    var should = require('chai').should();
+    var chai = require('chai');
+    var should = chai.should();
+    var sinonChai = require('sinon-chai');
+
     var TimeController = require('controllers/TimeController');
     var Events = require('events');
 
