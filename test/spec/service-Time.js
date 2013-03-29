@@ -1,14 +1,14 @@
 /**
- * Time model tests
+ * Time service tests
  */
 define(function (require) {
     'use strict';
 
     var should = require('chai').should();
-    var Time = require('models/Time');
+    var Time = require('services/Time');
     var Events = require('events');
 
-    describe('Time model', function () {
+    describe('Time service', function () {
         it('should return an instantiatable', function () {
             var time = new Time();
             time.should.be.ok;

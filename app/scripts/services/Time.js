@@ -1,6 +1,6 @@
 /**
- * Time Model
- * a pseudo-model for keeping track of time
+ * Time Service
+ * a service for keeping track of time
  */
 
 define(function (require) {
