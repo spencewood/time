@@ -2,8 +2,16 @@
  * Requrie config
  */
 require.config({
-    baseUrl: '/scripts',
+    baseUrl: '.',
     paths: {
+        underscore: 'lib/lodash',
+
         rAF: 'lib/rAF',
+        events: 'lib/events'
+    },
+    shims: {
+        events: {
+            deps: ['underscore']
+        },
     }
 });
