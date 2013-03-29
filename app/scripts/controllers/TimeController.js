@@ -7,5 +7,12 @@ define(function (require) {
 
     var time = require('models/Time');
 
-    console.log('initialized');
+    /**
+     * Time Controller
+     */
+    var TimeController = function () {
+
+    };
+
+    return TimeController;
 });
