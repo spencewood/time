@@ -3,9 +3,9 @@
  */
 
 define(function (require) {
-	'use strict';
+    'use strict';
 
-	var time = require('models/Time');
+    var time = require('models/Time');
 
-	console.log('initialized');
+    console.log('initialized');
 });
