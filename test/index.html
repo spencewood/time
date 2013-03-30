@@ -18,6 +18,7 @@
                     //testing
                     mocha: '../../test/lib/mocha',
                     chai: '../../test/lib/chai',
+                    sinon: '../../test/lib/sinon',
                     'sinon-chai': '../../test/lib/sinon-chai'
                 },
                 shim: {
@@ -28,6 +29,9 @@
                     //testing
                     mocha: {
                         exports: 'mocha'
+                    },
+                    sinon: {
+                        exports: 'sinon'
                     }
                 }
             },
@@ -40,7 +44,8 @@
 
                 require([
                     '../../test/spec/service-Time',
-                    '../../test/spec/controller-Time'
+                    '../../test/spec/controller-Time',
+                    '../../test/spec/controller-Canvas'
                 ], function(){
                     mocha.run();
                 });

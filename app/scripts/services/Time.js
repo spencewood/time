@@ -91,5 +91,5 @@ define(function (require) {
         return milliseconds < 0 ? 0 : milliseconds;
     };
 
-    return Time;
+    return new Time();
 });
