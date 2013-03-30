@@ -28,7 +28,7 @@ define(function (require) {
             setTimeout(function () {
                 timeController.processTime.should.have.been.calledOnce;
                 timeController.processTime.restore();
-                timeController.destroy()
+                timeController.destroy();
                 done();
             }, 300);
         });
@@ -40,12 +40,12 @@ define(function (require) {
             timeController.destroy();
             Events.off.should.have.been.called;
             Events.off.restore();
-            timeController.destroy()
+            timeController.destroy();
         });
 
         it('should return object when calling destroy method', function () {
             var timeController = new TimeController();
             timeController.destroy().should.equal(timeController);
-        })
+        });
     });
 });
