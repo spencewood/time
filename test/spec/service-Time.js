@@ -5,52 +5,52 @@ define(function (require) {
     'use strict';
 
     var should = require('chai').should();
-    var time = require('services/Time');
+    var timeService = require('services/TimeService');
     var Events = require('events');
 
     describe('Time service', function () {
         it('should return an instantiatable', function () {
-            time.should.be.ok;
+            timeService.should.be.ok;
         });
 
         it('should emit a start event on time start', function (done) {
             Events.once('time:start', function () {
                 done();
-                time.stop();
+                timeService.stop();
             });
 
-            time.start();
+            timeService.start();
         });
 
         it('should return time instance on start call', function () {
-            time.start().should.equal(time);
-            time.stop();
+            timeService.start().should.equal(timeService);
+            timeService.stop();
         });
 
         it('should return the number of seconds since started with getSeconds', function (done) {
-            time.start();
+            timeService.start();
             setTimeout(function () {
-                time.getSeconds().should.be.above(1);
-                time.stop();
+                timeService.getSeconds().should.be.above(1);
+                timeService.stop();
                 done();
             }, 1090);
         });
 
         it('should emit a second tick each second after start', function (done) {
             Events.once('time:second', function (e) {
-                time.getSeconds().should.be.above(0);
+                timeService.getSeconds().should.be.above(0);
                 should.exist(e);
-                time.stop();
+                timeService.stop();
                 done();
             });
 
-            time.start();
+            timeService.start();
         });
 
         it('should return true for isStarted when time has started', function () {
-            time.start();
-            time.isStarted().should.be.true;
-            time.stop();
+            timeService.start();
+            timeService.isStarted().should.be.true;
+            timeService.stop();
         });
 
         it('should emit a stop even on time stop', function (done) {
@@ -58,28 +58,28 @@ define(function (require) {
                 done();
             });
 
-            time.start();
-            time.stop();
+            timeService.start();
+            timeService.stop();
         });
 
         it('should return time instance when calling stop', function () {
-            time.start().stop().should.equal(time);
+            timeService.start().stop().should.equal(timeService);
         });
 
         it('should stop the timer and and clear the time on stop', function (done) {
-            time.start();
+            timeService.start();
             setTimeout(function () {
-                time.stop();
-                time.getSeconds().should.equal(0);
+                timeService.stop();
+                timeService.getSeconds().should.equal(0);
                 done()
             }, 300);
         });
 
         it('should return true for isStopped when time has stopped', function () {
-            time.isStopped().should.be.true;
-            time.start();
-            time.stop();
-            time.isStopped().should.be.true;
+            timeService.isStopped().should.be.true;
+            timeService.start();
+            timeService.stop();
+            timeService.isStopped().should.be.true;
         });
     });
 });

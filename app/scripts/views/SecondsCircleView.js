@@ -16,8 +16,8 @@ define(function (require) {
 	/**
 	 * Sets the time for the view
 	 */
-	SecondsCircleView.prototype.setTime = function (tme) {
-		this.time = tme;
+	SecondsCircleView.prototype.setTime = function (time) {
+		this.time = time;
 	};
 
 	/**

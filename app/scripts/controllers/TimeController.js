@@ -5,21 +5,24 @@
 define(function (require) {
     'use strict';
 
-    var time = require('services/Time');
+    var timeService = require('services/TimeService');
     var Events = require('events');
+    var SecondsCircleView = require('views/SecondsCircleView');
 
     /**
      * Time Controller
      */
     var TimeController = function () {
+        this.secondsCircleView = new SecondsCircleView();
+
         Events.on('time:second', this.processTime.bind(this));
     };
 
     /**
      * Process time on event trigger
      */
-    TimeController.prototype.processTime = function (tme) {
-        console.log(tme);
+    TimeController.prototype.processTime = function (time) {
+        this.secondsCircleView(time);
     };
 
     /**
