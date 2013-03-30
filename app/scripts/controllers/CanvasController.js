@@ -108,5 +108,15 @@ define(function (require) {
         this.context.restore();
     };
 
+    /**
+     * Run cleanup tasks
+     */
+    CanvasController.prototype.destroy = function () {
+        this.stopAnimation();
+        this.context = null;
+
+        return this;
+    };
+
     return CanvasController;
 });

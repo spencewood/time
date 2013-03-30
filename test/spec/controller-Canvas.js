@@ -13,10 +13,50 @@ define(function (require) {
     var CanvasController = require('controllers/CanvasController');
     var Events = require('events');
 
-    describe.skip('Canvas Controller', function () {
+    describe('Canvas Controller', function () {
         it('should return an instantiatable', function () {
-            var canvasController = new CanvasController();
-            timeController.should.be.ok;
+            var canvasController = new CanvasController('test', 100, 100);
+            canvasController.should.be.ok;
+            canvasController.destroy();
+        });
+
+        it('should stop animating and remove the context on destroy', function () {
+            var canvasController = new CanvasController('test', 100, 100);
+            canvasController.destroy();
+            should.not.exist(canvasController.getContext());
+            canvasController.isAnimating().should.be.false;
+        });
+
+        it('should report current animation status with isAnimating', function () {
+            var canvasController = new CanvasController('test', 100, 100);
+            canvasController.startAnimation();
+            canvasController.isAnimating().should.be.true;
+            canvasController.stopAnimation();
+            canvasController.isAnimating().should.be.false;
+            canvasController.destroy();
+        });
+
+        it('should call tick while animation is going', function (done) {
+            var canvasController = new CanvasController('test', 100, 100);
+            sinon.spy(canvasController, 'tick');
+            canvasController.startAnimation();
+            setTimeout(function () {
+                canvasController.tick.should.have.been.called;
+                canvasController.destroy();
+                done();
+            }, 300);
+        });
+
+        it('should take functions to call for animation run', function (done) {
+            var canvasController = new CanvasController('test', 100, 100);
+            var spy = sinon.spy();
+            canvasController.addTask(spy);
+            canvasController.startAnimation();
+            setTimeout(function () {
+                spy.should.have.been.calledOnce;
+                canvasController.destroy();
+                done();
+            }, 300);
         });
     });
 });

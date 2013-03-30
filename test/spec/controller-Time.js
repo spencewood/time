@@ -26,7 +26,7 @@ define(function (require) {
 
             Events.trigger('time:second');
             setTimeout(function () {
-                timeController.processTime.should.have.been.calledOnce;
+                timeController.processTime.should.have.been.called;
                 timeController.processTime.restore();
                 timeController.destroy();
                 done();
