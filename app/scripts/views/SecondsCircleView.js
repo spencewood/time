@@ -18,6 +18,8 @@ define(function (require) {
 	 */
 	SecondsCircleView.prototype.setTime = function (time) {
 		this.time = time;
+
+		return this;
 	};
 
 	/**

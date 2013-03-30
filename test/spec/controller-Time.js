@@ -11,7 +11,10 @@ define(function (require) {
     chai.use(sinonChai);
 
     var TimeController = require('controllers/TimeController');
+    var CanvasController = require('controllers/CanvasController');
     var Events = require('events');
+
+    var canvas = new CanvasController('test', 100, 100);
 
     describe('Time Controller', function () {
         it('should return an instantiatable', function () {
@@ -22,7 +25,7 @@ define(function (require) {
 
         it('should call the time processor when the seconds event is fired', function (done) {
             sinon.spy(TimeController.prototype, 'processTime');
-            var timeController = new TimeController();
+            var timeController = new TimeController(canvas);
 
             Events.trigger('time:second');
             setTimeout(function () {

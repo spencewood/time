@@ -12,7 +12,9 @@ define(function (require) {
     /**
      * Time Controller
      */
-    var TimeController = function () {
+    var TimeController = function (canvas) {
+        this.canvas = canvas;
+
         this.secondsCircleView = new SecondsCircleView();
 
         Events.on('time:second', this.processTime.bind(this));
@@ -22,7 +24,7 @@ define(function (require) {
      * Process time on event trigger
      */
     TimeController.prototype.processTime = function (time) {
-        this.secondsCircleView(time);
+        this.canvas.addTask(this.secondsCircleView.setTime(time).render);
     };
 
     /**

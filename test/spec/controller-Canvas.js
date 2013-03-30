@@ -58,5 +58,17 @@ define(function (require) {
                 done();
             }, 300);
         });
+
+        it('should pass the task functions the canvas context', function (done) {
+            var canvasController = new CanvasController('test', 100, 100);
+            var spy = sinon.spy();
+            canvasController.addTask(spy);
+            canvasController.startAnimation();
+            setTimeout(function () {
+                spy.args[0].should.not.be.null;
+                canvasController.destroy();
+                done();
+            }, 300);
+        });
     });
 });
