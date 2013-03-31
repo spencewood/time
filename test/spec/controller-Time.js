@@ -16,7 +16,7 @@ define(function (require) {
 
     var canvas = new CanvasController('test', 100, 100);
 
-    describe('Time Controller', function () {
+    describe.skip('Time Controller', function () {
         it('should return an instantiatable', function () {
             var timeController = new TimeController();
             timeController.should.be.ok;

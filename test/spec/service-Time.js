@@ -8,7 +8,7 @@ define(function (require) {
     var timeService = require('services/TimeService');
     var Events = require('events');
 
-    describe('Time service', function () {
+    describe.skip('Time service', function () {
         it('should return an instantiatable', function () {
             timeService.should.be.ok;
         });

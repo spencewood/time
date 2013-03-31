@@ -13,7 +13,7 @@ define(function (require) {
     var _interval = null;
 
     var getTime = function () {
-        return new Date().getTime();
+        return new Date().getSeconds() * 1000;
     };
 
     /**

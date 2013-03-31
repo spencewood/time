@@ -27,6 +27,8 @@ define(function (require) {
      * @param {Number} height
      */
     var CanvasController = function (selector, width, height) {
+        _.bindAll(this);
+
         var canvas = this.canvas = document.createElement('canvas');
         canvas.width = width;
         canvas.height = height;
@@ -49,7 +51,7 @@ define(function (require) {
     CanvasController.prototype.startAnimation = function () {
         if (!animating) {
             animating = true;
-            requestAnimationFrame(this.tick.bind(this));
+            window.requestAnimationFrame(this.tick);
         }
     };
 
@@ -75,7 +77,7 @@ define(function (require) {
     CanvasController.prototype.tick = function (time) {
         if (animating) {
             this.processTasks();
-            requestAnimationFrame(this.tick.bind(this));
+            window.requestAnimationFrame(this.tick.bind(this));
         }
     };
 
@@ -93,8 +95,11 @@ define(function (require) {
      * Process tasks that are in queue passing in the canvas' context
      */
     CanvasController.prototype.processTasks = function () {
-        while (tasks.length > 0) {
-            tasks.shift()(this.context);
+        if(tasks.length > 0){
+            this.clear();
+            while (tasks.length > 0) {
+                tasks.shift()(this.context);
+            }
         }
     };
 
