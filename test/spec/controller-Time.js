@@ -16,21 +16,27 @@ define(function (require) {
 
     var canvas = new CanvasController('test', 100, 100);
 
-    describe.skip('Time Controller', function () {
+    describe('Time Controller', function () {
         it('should return an instantiatable', function () {
-            var timeController = new TimeController();
+            var timeController = new TimeController(canvas);
             timeController.should.be.ok;
             timeController.destroy();
         });
 
+        it('should throw when a canvas is not supplied', function () {
+            (function () {
+                new TimeController();
+            }).should.throw();
+        });
+
         it('should call the time processor when the seconds event is fired', function (done) {
-            sinon.spy(TimeController.prototype, 'processTime');
+            var spy = sinon.spy(TimeController.prototype, 'processTime');
             var timeController = new TimeController(canvas);
 
             Events.trigger('time:second');
             setTimeout(function () {
                 timeController.processTime.should.have.been.called;
-                timeController.processTime.restore();
+                spy.restore();
                 timeController.destroy();
                 done();
             }, 300);
@@ -38,7 +44,7 @@ define(function (require) {
 
         it('should cleanup events with the destroy method', function () {
             sinon.spy(Events, 'off');
-            var timeController = new TimeController();
+            var timeController = new TimeController(canvas);
 
             timeController.destroy();
             Events.off.should.have.been.called;
@@ -47,7 +53,7 @@ define(function (require) {
         });
 
         it('should return object when calling destroy method', function () {
-            var timeController = new TimeController();
+            var timeController = new TimeController(canvas);
             timeController.destroy().should.equal(timeController);
         });
     });

@@ -14,13 +14,15 @@ define(function (require) {
      * Time Controller
      */
     var TimeController = function (canvas) {
-        _.bindAll(this);
+        if(_.isUndefined(canvas)){
+            throw new Error('Canvas must be supplied');
+        }
 
         this.canvas = canvas;
 
         this.secondsCircleView = new SecondsCircleView();
 
-        Events.on('time:second', this.processTime);
+        Events.on('time:second', _.bind(this.processTime, this));
         Events.on('time:start', canvas.startAnimation);
         Events.on('time:stop', canvas.stopAnimation);
     };

@@ -8,7 +8,7 @@ define(function (require) {
     var timeService = require('services/TimeService');
     var Events = require('events');
 
-    describe.skip('Time service', function () {
+    describe('Time service', function () {
         it('should return an instantiatable', function () {
             timeService.should.be.ok;
         });
@@ -30,7 +30,7 @@ define(function (require) {
         it('should return the number of seconds since started with getSeconds', function (done) {
             timeService.start();
             setTimeout(function () {
-                timeService.getSeconds().should.be.above(1);
+                timeService.getSeconds().should.equal(1);
                 timeService.stop();
                 done();
             }, 1090);
