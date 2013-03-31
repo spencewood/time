@@ -9,6 +9,7 @@ define(function (require) {
     var timeService = require('services/TimeService');
     var Events = require('events');
     var SecondsCircleView = require('views/SecondsCircleView');
+    var SecondsNumberView = require('views/SecondsNumberView');
 
     /**
      * Time Controller
@@ -21,6 +22,7 @@ define(function (require) {
         this.canvas = canvas;
 
         this.secondsCircleView = new SecondsCircleView();
+        this.secondsNumberView = new SecondsNumberView();
 
         Events.on('time:second', _.bind(this.processTime, this));
         Events.on('time:start', canvas.startAnimation);
@@ -32,6 +34,7 @@ define(function (require) {
      */
     TimeController.prototype.processTime = function (time) {
         this.canvas.addTask(this.secondsCircleView.setTime(time).render);
+        this.canvas.addTask(this.secondsNumberView.setTime(time).render);
     };
 
     /**

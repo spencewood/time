@@ -15,6 +15,11 @@ define(function (require) {
     var _top = radians.getTop();
 
     /**
+     * Previous time
+     */
+    var _oldTime = 0;
+
+    /**
      * Seconds circle view
      */
     var SecondsCircleView = function () {
@@ -28,6 +33,7 @@ define(function (require) {
      */
     SecondsCircleView.prototype.setTime = function (time) {
         this.time = time;
+        _oldTime = time;
 
         return this;
     };
