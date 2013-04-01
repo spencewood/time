@@ -4,7 +4,12 @@
 define(function (require) {
     'use strict';
 
-    var should = require('chai').should();
+    var chai = require('chai');
+    var sinon = require('sinon');
+    var sinonChai = require('sinon-chai');
+    var should = chai.should();
+    chai.use(sinonChai);
+
     var timeService = require('services/TimeService');
     var Events = require('events');
 
@@ -41,6 +46,18 @@ define(function (require) {
                 timeService.getSeconds().should.be.above(0);
                 should.exist(e);
                 timeService.stop();
+                done();
+            });
+
+            timeService.start();
+        });
+
+        it.skip('should emit a minute tick each minute after start', function (done) {
+            var clock = sinon.useFakeTimers(new Date('01/01/01 18:15:59').getTime());
+
+            Events.once('time:minute', function (e) {
+                timeService.stop();
+                clock.restore();
                 done();
             });
 

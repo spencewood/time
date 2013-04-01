@@ -30,12 +30,25 @@ define(function (require) {
         });
 
         it('should call the time processor when the seconds event is fired', function (done) {
-            var spy = sinon.spy(TimeController.prototype, 'processTime');
+            var spy = sinon.spy(TimeController.prototype, 'processSecond');
             var timeController = new TimeController(canvas);
 
             Events.trigger('time:second');
             setTimeout(function () {
-                timeController.processTime.should.have.been.called;
+                timeController.processSecond.should.have.been.called;
+                spy.restore();
+                timeController.destroy();
+                done();
+            }, 300);
+        });
+
+        it('should call the time processor when the minutes event is fired', function (done) {
+            var spy = sinon.spy(TimeController.prototype, 'processMinute');
+            var timeController = new TimeController(canvas);
+
+            Events.trigger('time:minute');
+            setTimeout(function () {
+                timeController.processMinute.should.have.been.called;
                 spy.restore();
                 timeController.destroy();
                 done();

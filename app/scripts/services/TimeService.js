@@ -6,6 +6,7 @@
 define(function (require) {
     'use strict';
 
+    var _ = require('underscore');
     var Events = require('events');
 
     var _start = 0;
@@ -31,7 +32,7 @@ define(function (require) {
         Events.trigger('time:start');
         _start = getTime();
         _started = true;
-        _interval = setInterval(this.timeEvent.bind(this), 1000);
+        _interval = setInterval(_.bind(this.timeEvent, this), 1000);
 
         return this;
     };
