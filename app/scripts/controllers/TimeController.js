@@ -44,7 +44,7 @@ define(function (require) {
      * Process minute event
      */
     TimeController.prototype.processMinute = function (time) {
-        //this.canvas.addTask(this.minutesCircleView.setTime(time).render);
+        this.canvas.addTask(this.minutesCircleView.setTime(time).render);
     };
 
     /**
